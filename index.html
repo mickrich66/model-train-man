@@ -1,407 +1,353 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Model Train Man - All Things Model Trains</title>
-<style>
-/* ===== BASE STYLES ===== */
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: Arial, sans-serif; background: #f5f5f0; color: #333; }
-/* ===== TOP NAVIGATION ===== */
-.topnav {
-background: #004D33;
-padding: 0;
-position: sticky;
-top: 0;
-z-index: 1000;
-box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-text-align: center;
-}
-.topnav button {
-background: none;
-border: none;
-color: white;
-padding: 15px 15px;
-cursor: pointer;
-font-size: 16px;
-font-weight: bold;
-}
-.topnav button:hover { background: #006633; }
-.topnav button.active { background: #FFD700; color: #004D33; }
-/* ===== PAGE SECTIONS ===== */
-.page { display: none; padding: 20px; }
-.page.active { display: block; }
-/* ===== HERO BANNER ===== */
-.hero {
-background: linear-gradient(135deg, #004D33, #006633);
-color: white;
-text-align: center;
-padding: 50px 20px;
-}
-.hero h1 { font-size: 40px; color: #FFD700; margin-bottom: 10px; }
-/* ===== AD BOARD ===== */
-.ad-grid {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-gap: 15px;
-max-width: 1000px;
-margin: 20px auto;
-}
-.ad-box {
-background: white;
-border: 2px dashed #ccc;
-padding: 20px;
-text-align: center;
-border-radius: 10px;
-}
-/* Style for taken ads */
-.ad-box.taken {
-border: 2px solid #004D33;
-background: #e8f5e8;
-}
-/* ===== FORMS ===== */
-.form-box {
-max-width: 500px;
-margin: 20px auto;
-background: white;
-padding: 30px;
-border-radius: 10px;
-box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-input, select, textarea {
-width: 100%;
-padding: 10px;
-margin-bottom: 15px;
-border: 1px solid #ccc;
-border-radius: 5px;
-}
-.btn {
-background: #004D33;
-color: white;
-padding: 12px 20px;
-border: none;
-cursor: pointer;
-width: 100%;
-font-size: 18px;
-font-weight: bold;
-border-radius: 5px;
-}
-.btn:hover { background: #006633; }
-/* ===== FOOTER ===== */
-.footer {
-background: #004D33;
-color: white;
-text-align: center;
-padding: 20px;
-margin-top: 50px;
-}
-/* Result Message Styles */
-#result-message, #contact-result-message {
-margin-top: 15px;
-padding: 10px;
-border-radius: 5px;
-display: none;
-text-align: center;
-}
-.success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
-.error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Train Man - All Things Model Trains</title>
+    <style>
+        /* ===== BASE STYLES ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #f5f5f0; color: #333; }
+
+        /* ===== TOP NAVIGATION ===== */
+        .topnav {
+            background: #004D33;
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+        .topnav button {
+            background: none;
+            border: none;
+            color: white;
+            padding: 15px 15px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .topnav button:hover { background: #006633; }
+        .topnav button.active { background: #FFD700; color: #004D33; }
+
+        /* ===== PAGE SECTIONS ===== */
+        .page { display: none; padding: 20px; }
+        .page.active { display: block; }
+
+        /* ===== HERO BANNER ===== */
+        .hero {
+            background: linear-gradient(135deg, #004D33, #006633);
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+        }
+        .hero h1 { font-size: 40px; color: #FFD700; margin-bottom: 10px; }
+
+        /* ===== AD BOARD ===== */
+        .ad-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            max-width: 1000px;
+            margin: 20px auto;
+        }
+        .ad-box {
+            background: white;
+            border: 2px dashed #ccc;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+        }
+        .ad-box.taken {
+            border: 2px solid #004D33;
+            background: #e8f5e8;
+        }
+
+        /* ===== FORMS ===== */
+        .form-box {
+            max-width: 500px;
+            margin: 20px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .btn {
+            background: #004D33;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+        .btn:hover { background: #006633; }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: #004D33;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        /* Result Message Styles */
+        #result-message, #contact-result-message {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+            text-align: center;
+        }
+        .success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+    </style>
 </head>
 <body>
+
 <!-- NAVIGATION MENU -->
 <div class="topnav">
-<button onclick="showPage('home')" class="active">🏠 Home</button>
-<button onclick="showPage('finder')">🚂 Train Finder</button>
-<button onclick="showPage('adboard')">📢 Ad Board</button>
-<button onclick="showPage('contact')">✉ Contact</button>
+    <button onclick="showPage('home')" id="nav-home" class="active">🏠 Home</button>
+    <button onclick="showPage('finder')" id="nav-finder">🚂 Train Finder</button>
+    <button onclick="showPage('adboard')" id="nav-adboard">📢 Ad Board</button>
+    <button onclick="showPage('contact')" id="nav-contact">✉ Contact</button>
 </div>
+
 <!-- ================= HOME PAGE ================= -->
 <div id="home" class="page active">
-<div class="hero">
-<h1>Model Train Man</h1>
-<p>Your Ultimate Resource for Hornby Trains & Layouts</p>
+    <div class="hero">
+        <h1>Model Train Man</h1>
+        <p>Your Ultimate Resource for Hornby Trains & Layouts</p>
+    </div>
+    <div style="max-width:800px; margin:40px auto; text-align:center;">
+        <h2>Welcome to the Community</h2>
+        <p>Use the buttons above to find train details, book an ad slot, or contact us.</p>
+        <br>
+        <button class="btn" style="width:auto;" onclick="showPage('finder')">Start Searching Trains</button>
+    </div>
 </div>
-<div style="max-width:800px; margin:40px auto; text-align:center;">
-<h2>Welcome to the Community</h2>
-<p>Use the buttons above to find train details, book an ad slot, or contact us.</p>
-<br>
-<button class="btn" style="width:auto;" onclick="showPage('finder')">Start Searching
-Trains</button>
-</div>
-</div>
+
 <!-- ================= TRAIN FINDER PAGE ================= -->
 <div id="finder" class="page">
-<div class="hero">
-<h1>Train Finder</h1>
-<p>Identify your Hornby Models (1960s - Present)</p>
+    <div class="hero">
+        <h1>Train Finder</h1>
+        <p>Identify your Hornby Models (1960s - Present)</p>
+    </div>
+    <div class="form-box">
+        <h3>Search Database</h3>
+        <input type="text" id="trainSearch" placeholder="Enter R-Number (e.g. R050)">
+        <button class="btn" onclick="findTrain()">Search</button>
+        <div id="trainResult" style="display:none; margin-top:20px; border-top:1px solid #ccc; padding-top:20px;">
+            <h2 id="t-name" style="color:#004D33;"></h2>
+            <p><strong>Category:</strong> <span id="t-cat"></span></p>
+            <p><strong>Year:</strong> <span id="t-year"></span></p>
+            <p><strong>Value:</strong> <span id="t-val"></span></p>
+            <p id="t-desc"></p>
+            <br>
+            <button class="btn" style="background:#d32f2f;" onclick="searchEbay()">Search on eBay</button>
+        </div>
+    </div>
 </div>
-<div class="form-box">
-<h3>Search Database</h3>
-<input type="text" id="trainSearch" placeholder="Enter R-Number (e.g. R050)">
-<button class="btn" onclick="findTrain()">Search</button>
-<div id="trainResult" style="display:none; margin-top:20px; border-top:1px solid #ccc;
-padding-top:20px;">
-<h2 id="t-name" style="color:#004D33;"></h2>
-<p><strong>Category:</strong> <span id="t-cat"></span></p>
-<p><strong>Year:</strong> <span id="t-year"></span></p>
-<p><strong>Value:</strong> <span id="t-val"></span></p>
-<p id="t-desc"></p>
-<br>
-<button class="btn" style="background:#d32f2f;" onclick="searchEbay()">Search on
-eBay</button>
-</div>
-</div>
-</div>
+
 <!-- ================= AD BOARD PAGE ================= -->
 <div id="adboard" class="page">
-<div class="hero">
-<h1>Community Ad Board</h1>
-<p>Advertise here for just £5 per week!</p>
+    <div class="hero">
+        <h1>Community Ad Board</h1>
+        <p>Advertise here for just £5 per week!</p>
+    </div>
+    <!-- THE AD GRID -->
+    <div class="ad-grid">
+        <!-- Slots 1 to 12 -->
+        <div class="ad-box"><h3>Slot 1</h3><p>Available</p><button class="btn" style="width:auto; font-size:12px; margin-top:10px;" onclick="scrollToBook(1)">Book This Slot</button></div>
+        <div class="ad-box"><h3>Slot 2</h3><p>Available</p><button class="btn" style="width:auto; font-size:12px; margin-top:10px;" onclick="scrollToBook(2)">Book This Slot</button></div>
+        <div class="ad-box"><h3>Slot 3</h3><p>Available</p><button class="btn" style="width:auto; font-size:12px; margin-top:10px;" onclick="scrollToBook(3)">Book This Slot</button></div>
+        <div class="ad-box"><h3>Slot 4</h3><p>Available</p><button class="btn" style="width:auto; font-size:12px; margin-top:10px;" onclick="scrollToBook(4)">Book This Slot</button></div>
+        <div class="ad-box"><h3>Slot 5</h3><p>Available</p><button class="btn" style="width:auto; font-size:12px; margin-top:10px;" onclick="scrollToBook(5)">Book This Slot</button></div>
+        <div class="ad-box"><h3>Slot 6</h3><p>Available</p><button class="btn" style="width:auto; font-size:12px; margin-top:10px;" onclick="scrollToBook(6)">Book This Slot</button></div>
+        <div class="ad-box"><h3>Slot 7</h3><p>Available</p><button class="btn" style="width:auto; font-size:12px; margin-top:10px;" onclick="scrollToBook(7)">Book This Slot</button></div>
+        <div class="ad-box"><h3>Slot 8</h3><p>Available</p><button class="btn" style="width:auto; font-size:12px; margin-top:10px;" onclick="scrollToBook(8)">Book This Slot</button></div>
+        <div class="ad-box"><h3>Slot 9</h3><p>Available</p><button class="btn" style="width:auto; font-size:12px; margin-top:10px;" onclick="scrollToBook(9)">Book This Slot</button></div>
+        <div class="ad-box"><h3>Slot 10</h3><p>Available</p><button class="btn" style="width:auto; font-size:12px; margin-top:10px;" onclick="scrollToBook(10)">Book This Slot</button></div>
+        <div class="ad-box"><h3>Slot 11</h3><p>Available</p><button class="btn" style="width:auto; font-size:12px; margin-top:10px;" onclick="scrollToBook(11)">Book This Slot</button></div>
+        <div class="ad-box"><h3>Slot 12</h3><p>Available</p><button class="btn" style="width:auto; font-size:12px; margin-top:10px;" onclick="scrollToBook(12)">Book This Slot</button></div>
+    </div>
+    <!-- BOOKING FORM -->
+    <div id="bookingForm" class="form-box">
+        <h2 style="text-align:center; color:#004D33;">Book Your Ad</h2>
+        <p style="text-align:center; margin-bottom:20px;">Fill this in, then pay via PayPal.</p>
+        <form id="adBookingForm">
+            <input type="hidden" name="access_key" value="b0c4df94-e5b9-4f2e-9e9c-bb020441aff4">
+            <input type="hidden" name="subject" value="New Ad Booking">
+            <input type="hidden" name="from_name" value="Model Train Man Website">
+            <label>Name</label>
+            <input type="text" name="name" required>
+            <label>Email</label>
+            <input type="email" name="email" required>
+            <label>Which Slot Number?</label>
+            <select name="slot_number" id="slotSelect">
+                <option value="1">Slot 1</option><option value="2">Slot 2</option><option value="3">Slot 3</option>
+                <option value="4">Slot 4</option><option value="5">Slot 5</option><option value="6">Slot 6</option>
+                <option value="7">Slot 7</option><option value="8">Slot 8</option><option value="9">Slot 9</option>
+                <option value="10">Slot 10</option><option value="11">Slot 11</option><option value="12">Slot 12</option>
+            </select>
+            <label>Ad Text / Message</label>
+            <textarea name="message" rows="4" required placeholder="Type your ad text here..."></textarea>
+            <button type="submit" id="submitBtn" class="btn">Submit & Pay £5</button>
+            <div id="result-message"></div>
+        </form>
+    </div>
 </div>
-<!-- THE AD GRID -->
-<div class="ad-grid">
-<!-- Slot 1 -->
-<div class="ad-box">
-<h3>Slot 1</h3>
-<p>Available</p>
-<button class="btn" style="width:auto; font-size:12px; margin-top:10px;"
-onclick="scrollToBook(1)">Book This Slot</button>
-</div>
-<!-- Slot 2 -->
-<div class="ad-box">
-<h3>Slot 2</h3>
-<p>Available</p>
-<button class="btn" style="width:auto; font-size:12px; margin-top:10px;"
-onclick="scrollToBook(2)">Book This Slot</button>
-</div>
-<!-- Slot 3 -->
-<div class="ad-box">
-<h3>Slot 3</h3>
-<p>Available</p>
-<button class="btn" style="width:auto; font-size:12px; margin-top:10px;"
-onclick="scrollToBook(3)">Book This Slot</button>
-</div>
-<!-- Slot 4 -->
-<div class="ad-box">
-<h3>Slot 4</h3>
-<p>Available</p>
-<button class="btn" style="width:auto; font-size:12px; margin-top:10px;"
-onclick="scrollToBook(4)">Book This Slot</button>
-</div>
-<!-- Slot 5 -->
-<div class="ad-box">
-<h3>Slot 5</h3>
-<p>Available</p>
-<button class="btn" style="width:auto; font-size:12px; margin-top:10px;"
-onclick="scrollToBook(5)">Book This Slot</button>
-</div>
-<!-- Slot 6 -->
-<div class="ad-box">
-<h3>Slot 6</h3>
-<p>Available</p>
-<button class="btn" style="width:auto; font-size:12px; margin-top:10px;"
-onclick="scrollToBook(6)">Book This Slot</button>
-</div>
-<!-- Slot 7 -->
-<div class="ad-box">
-<h3>Slot 7</h3>
-<p>Available</p>
-<button class="btn" style="width:auto; font-size:12px; margin-top:10px;"
-onclick="scrollToBook(7)">Book This Slot</button>
-</div>
-<!-- Slot 8 -->
-<div class="ad-box">
-<h3>Slot 8</h3>
-<p>Available</p>
-<button class="btn" style="width:auto; font-size:12px; margin-top:10px;"
-onclick="scrollToBook(8)">Book This Slot</button>
-</div>
-<!-- Slot 9 -->
-<div class="ad-box">
-<h3>Slot 9</h3>
-<p>Available</p>
-<button class="btn" style="width:auto; font-size:12px; margin-top:10px;"
-onclick="scrollToBook(9)">Book This Slot</button>
-</div>
-<!-- Slot 10 -->
-<div class="ad-box">
-<h3>Slot 10</h3>
-<p>Available</p>
-<button class="btn" style="width:auto; font-size:12px; margin-top:10px;"
-onclick="scrollToBook(10)">Book This Slot</button>
-</div>
-<!-- Slot 11 -->
-<div class="ad-box">
-<h3>Slot 11</h3>
-<p>Available</p>
-<button class="btn" style="width:auto; font-size:12px; margin-top:10px;"
-onclick="scrollToBook(11)">Book This Slot</button>
-</div>
-<!-- Slot 12 -->
-<div class="ad-box">
-<h3>Slot 12</h3>
-<p>Available</p>
-<button class="btn" style="width:auto; font-size:12px; margin-top:10px;"
-onclick="scrollToBook(12)">Book This Slot</button>
-</div>
-</div>
-<!-- BOOKING FORM -->
-<div id="bookingForm" class="form-box">
-<h2 style="text-align:center; color:#004D33;">Book Your Ad</h2>
-<p style="text-align:center; margin-bottom:20px;">Fill this in, then pay via
-PayPal.</p>
-<form id="adBookingForm">
-<input type="hidden" name="access_key"
-value="b0c4df94-e5b9-4f2e-9e9c-bb020441aff4">
-<input type="hidden" name="subject" value="New Ad Booking">
-<input type="hidden" name="from_name" value="Model Train Man Website">
-<label>Name</label>
-<input type="text" name="name" required>
-<label>Email</label>
-<input type="email" name="email" required>
-<label>Which Slot Number?</label>
-<select name="slot_number" id="slotSelect">
-<option value="1">Slot 1</option><option value="2">Slot 2</option><option
-value="3">Slot 3</option>
-<option value="4">Slot 4</option><option value="5">Slot 5</option><option
-value="6">Slot 6</option>
-<option value="7">Slot 7</option><option value="8">Slot 8</option><option
-value="9">Slot 9</option>
-<option value="10">Slot 10</option><option value="11">Slot
-11</option><option value="12">Slot 12</option>
-</select>
-<label>Ad Text / Message</label>
-<textarea name="message" rows="4" required placeholder="Type your ad text
-here..."></textarea>
-<button type="submit" id="submitBtn" class="btn">Submit & Pay £5</button>
-<div id="result-message"></div>
-</form>
-</div>
-</div>
+
 <!-- ================= CONTACT PAGE ================= -->
 <div id="contact" class="page">
-<div class="hero">
-<h1>Contact Us</h1>
+    <div class="hero">
+        <h1>Contact Us</h1>
+    </div>
+    <div class="form-box">
+        <form id="contactForm">
+            <input type="hidden" name="access_key" value="b0c4df94-e5b9-4f2e-9e9c-bb020441aff4">
+            <input type="hidden" name="subject" value="New Contact Message">
+            <input type="hidden" name="from_name" value="Model Train Man Website">
+            <label>Name</label>
+            <input type="text" name="name" required>
+            <label>Email</label>
+            <input type="email" name="email" required>
+            <label>Message</label>
+            <textarea name="message" rows="5" required></textarea>
+            <button type="submit" id="contactSubmitBtn" class="btn">Send Message</button>
+            <div id="contact-result-message"></div>
+        </form>
+    </div>
 </div>
-<div class="form-box">
-<form id="contactForm">
-<input type="hidden" name="access_key"
-value="b0c4df94-e5b9-4f2e-9e9c-bb020441aff4">
-<input type="hidden" name="subject" value="New Contact Message">
-<input type="hidden" name="from_name" value="Model Train Man Website">
-<label>Name</label>
-<input type="text" name="name" required>
-<label>Email</label>
-<input type="email" name="email" required>
-<label>Message</label>
-<textarea name="message" rows="5" required></textarea>
-<button type="submit" id="contactSubmitBtn" class="btn">Send Message</button>
-<div id="contact-result-message"></div>
-</form>
-</div>
-</div>
+
 <div class="footer">
-<p>&copy; 2025 Model Train Man</p>
+    <p>&copy; 2025 Model Train Man</p>
 </div>
+
 <script>
-// Simple Navigation Script
-function showPage(pageId) {
-document.querySelectorAll('.page').forEach(div => div.classList.remove('active'));
-document.getElementById(pageId).classList.add('active');
-window.scrollTo(0,0);
-}
-function scrollToBook(slotNum) {
-document.getElementById('slotSelect').value = slotNum;
-document.getElementById('bookingForm').scrollIntoView({ behavior: 'smooth' });
-}
-// Train Finder Data & Logic
-const trains = [
-{id:"R050", name:"Flying Scotsman", cat:"Steam", val:"£150", year:"1968",
-desc:"Classic BR Green"},
-{id:"R250", name:"BR Class 47", cat:"Diesel", val:"£135", year:"1980", desc:"Blue
-Livery"},
-{id:"R1041", name:"Mallard", cat:"Steam", val:"£250", year:"2004", desc:"Speed
-Record Holder"},
-{id:"R550", name:"BR Freight Set", cat:"Set", val:"£200", year:"1975", desc:"Starter
-Freight Set"}
-];
-let currentTrain = null;
-function findTrain() {
-const input = document.getElementById('trainSearch').value.toUpperCase();
-const found = trains.find(t => t.id === input);
-if(found) {
-currentTrain = found;
-document.getElementById('t-name').innerText = found.name;
-document.getElementById('t-cat').innerText = found.cat;
-document.getElementById('t-year').innerText = found.year;
-document.getElementById('t-val').innerText = found.val;
-document.getElementById('t-desc').innerText = found.desc;
-document.getElementById('trainResult').style.display = 'block';
-} else {
-alert("Train not found! Try R050, R250, or R1041 as examples.");
-}
-}
-function searchEbay() {
-if(currentTrain) {
-window.open("https://www.ebay.co.uk/sch/i.html?_nkw=Hornby+" +
-currentTrain.name, "_blank");
-}
-}
+    // Simple Navigation Script
+    function showPage(pageId) {
+        // Update active page
+        document.querySelectorAll('.page').forEach(div => div.classList.remove('active'));
+        document.getElementById(pageId).classList.add('active');
+        
+        // Update active nav button
+        document.querySelectorAll('.topnav button').forEach(btn => btn.classList.remove('active'));
+        const navBtn = document.getElementById('nav-' + pageId);
+        if (navBtn) navBtn.classList.add('active');
+        
+        window.scrollTo(0,0);
+    }
 
-async function handleFormSubmit(form, resultElement, submitButton, redirectUrl = null) {
-submitButton.disabled = true;
-submitButton.innerText = "Sending...";
-resultElement.style.display = "none";
-const formData = new FormData(form);
-const object = Object.fromEntries(formData);
-const json = JSON.stringify(object);
-try {
-const response = await fetch("https://api.web3forms.com/submit", {
-method: "POST",
-headers: { "Content-Type": "application/json", "Accept": "application/json" },
-body: json
-});
-const res = await response.json();
-if (response.status === 200) {
-resultElement.innerHTML = redirectUrl ? "Booking sent! Redirecting to PayPal..." : "Message sent successfully!";
-resultElement.className = "success";
-resultElement.style.display = "block";
-if (redirectUrl) {
-setTimeout(() => { window.location.href = redirectUrl; }, 1500);
-} else {
-form.reset();
-}
-} else {
-resultElement.innerHTML = res.message || "Submission failed!";
-resultElement.className = "error";
-resultElement.style.display = "block";
-}
-} catch (error) {
-resultElement.innerHTML = "Something went wrong! Please check your internet connection.";
-resultElement.className = "error";
-resultElement.style.display = "block";
-} finally {
-if (!redirectUrl || resultElement.className === "error") {
-submitButton.disabled = false;
-submitButton.innerText = redirectUrl ? "Submit & Pay £5" : "Send Message";
-}
-}
-}
+    function scrollToBook(slotNum) {
+        document.getElementById('slotSelect').value = slotNum;
+        document.getElementById('bookingForm').scrollIntoView({ behavior: 'smooth' });
+    }
 
-// Ad Booking Form
-const adForm = document.getElementById('adBookingForm');
-adForm.addEventListener('submit', (e) => {
-e.preventDefault();
-handleFormSubmit(adForm, document.getElementById('result-message'), document.getElementById('submitBtn'), "https://www.paypal.com/ncp/payment/2S49PPAHGXK46");
-});
+    // Train Finder Data & Logic
+    const trains = [
+        {id:"R050", name:"Flying Scotsman", cat:"Steam", val:"£150", year:"1968", desc:"Classic BR Green"},
+        {id:"R250", name:"BR Class 47", cat:"Diesel", val:"£135", year:"1980", desc:"Blue Livery"},
+        {id:"R1041", name:"Mallard", cat:"Steam", val:"£250", year:"2004", desc:"Speed Record Holder"},
+        {id:"R550", name:"BR Freight Set", cat:"Set", val:"£200", year:"1975", desc:"Starter Freight Set"}
+    ];
 
-// Contact Form
-const contactForm = document.getElementById('contactForm');
-contactForm.addEventListener('submit', (e) => {
-e.preventDefault();
-handleFormSubmit(contactForm, document.getElementById('contact-result-message'), document.getElementById('contactSubmitBtn'));
-});
+    let currentTrain = null;
+
+    function findTrain() {
+        const input = document.getElementById('trainSearch').value.toUpperCase();
+        const found = trains.find(t => t.id === input);
+        if(found) {
+            currentTrain = found;
+            document.getElementById('t-name').innerText = found.name;
+            document.getElementById('t-cat').innerText = found.cat;
+            document.getElementById('t-year').innerText = found.year;
+            document.getElementById('t-val').innerText = found.val;
+            document.getElementById('t-desc').innerText = found.desc;
+            document.getElementById('trainResult').style.display = 'block';
+        } else {
+            alert("Train not found! Try R050, R250, or R1041 as examples.");
+        }
+    }
+
+    function searchEbay() {
+        if(currentTrain) {
+            window.open("https://www.ebay.co.uk/sch/i.html?_nkw=Hornby+" + encodeURIComponent(currentTrain.name), "_blank");
+        }
+    }
+
+    async function handleFormSubmit(form, resultElement, submitButton, redirectUrl = null) {
+        submitButton.disabled = true;
+        const originalText = submitButton.innerText;
+        submitButton.innerText = "Sending...";
+        resultElement.style.display = "none";
+        
+        const formData = new FormData(form);
+        const object = Object.fromEntries(formData);
+        const json = JSON.stringify(object);
+
+        try {
+            const response = await fetch("https://api.web3forms.com/submit", {
+                method: "POST",
+                headers: { "Content-Type": "application/json", "Accept": "application/json" },
+                body: json
+            });
+            const res = await response.json();
+            if (response.status === 200) {
+                resultElement.innerHTML = redirectUrl ? "Booking sent! Redirecting to PayPal..." : "Message sent successfully!";
+                resultElement.className = "success";
+                resultElement.style.display = "block";
+                if (redirectUrl) {
+                    setTimeout(() => { window.location.href = redirectUrl; }, 1500);
+                } else {
+                    form.reset();
+                }
+            } else {
+                resultElement.innerHTML = res.message || "Submission failed!";
+                resultElement.className = "error";
+                resultElement.style.display = "block";
+            }
+        } catch (error) {
+            resultElement.innerHTML = "Something went wrong! Please check your internet connection.";
+            resultElement.className = "error";
+            resultElement.style.display = "block";
+        } finally {
+            if (!redirectUrl || resultElement.className === "error") {
+                submitButton.disabled = false;
+                submitButton.innerText = originalText;
+            }
+        }
+    }
+
+    // Ad Booking Form
+    const adForm = document.getElementById('adBookingForm');
+    if (adForm) {
+        adForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            handleFormSubmit(adForm, document.getElementById('result-message'), document.getElementById('submitBtn'), "https://www.paypal.com/ncp/payment/2S49PPAHGXK46");
+        });
+    }
+
+    // Contact Form
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            handleFormSubmit(contactForm, document.getElementById('contact-result-message'), document.getElementById('contactSubmitBtn'));
+        });
+    }
 </script>
+
 </body>
 </html>
