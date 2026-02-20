@@ -8,8 +8,8 @@
         /* ===== BASE STYLES ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: Arial, sans-serif; background: #f5f5f0; color: #333; }
-
-        /* ===== TOP NAVIGATION ===== */
+        
+        /* ===== TOP NAV ===== */
         .topnav {
             background: #004D33;
             padding: 0;
@@ -17,92 +17,189 @@
             top: 0;
             z-index: 1000;
             box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-            text-align: center;
+            overflow-x: auto;
+            white-space: nowrap;
         }
-        .topnav button {
+        .topnav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+        }
+        .site-logo {
+            color: #FFD700;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 15px 10px;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+        .nav-btn {
             background: none;
             border: none;
             color: white;
-            padding: 15px 15px;
+            padding: 15px 12px;
             cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
+            font-size: 14px;
+            white-space: nowrap;
         }
-        .topnav button:hover { background: #006633; }
-        .topnav button.active { background: #FFD700; color: #004D33; }
+        .nav-btn:hover, .nav-btn.active {
+            background: #006633;
+        }
 
         /* ===== PAGE SECTIONS ===== */
-        .page { display: none; padding: 20px; }
+        .page { display: none; }
         .page.active { display: block; }
 
-        /* ===== HERO BANNER ===== */
+        /* ===== HERO ===== */
         .hero {
-            background: linear-gradient(135deg, #004D33, #006633);
+            background: linear-gradient(135deg, #004D33, #006633, #008040);
             color: white;
             text-align: center;
-            padding: 50px 20px;
+            padding: 60px 20px;
+            position: relative;
+            overflow: hidden;
         }
-        .hero h1 { font-size: 40px; color: #FFD700; margin-bottom: 10px; }
+        .hero h1 { font-size: 36px; color: #FFD700; margin-bottom: 10px; }
+        .hero p { font-size: 18px; margin-bottom: 20px; }
+        .hero-train {
+            position: absolute;
+            bottom: 10px;
+            font-size: 30px;
+            animation: chug 12s linear infinite;
+        }
+        @keyframes chug { from { left: -150px; } to { left: 100%; } }
 
-        /* ===== AD BOARD ===== */
-        .ad-grid {
+        /* ===== BUTTONS ===== */
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            font-size: 15px;
+            margin: 5px;
+        }
+        .btn-green { background: #006633; color: white; }
+        .btn-green:hover { background: #008040; }
+        .btn-gold { background: #FFD700; color: #004D33; }
+        .btn-gold:hover { background: #FFA500; }
+        .btn-red { background: #FF6B6B; color: white; }
+        .btn-red:hover { background: #FF4C4C; }
+        .btn-whatsapp { background: #25D366; color: white; }
+
+        /* ===== FEATURE CARDS ===== */
+        .cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-top: 4px solid #006633;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .card:hover { transform: translateY(-5px); }
+        .card-icon { font-size: 40px; margin-bottom: 10px; }
+        .card h3 { color: #004D33; margin-bottom: 8px; }
+        .card p { color: #666; font-size: 14px; }
+
+        /* ===== AD BOARD ===== */
+        .ad-section {
+            background: #e8f5e8;
+            padding: 40px 20px;
+        }
+        .ad-section h2 {
+            text-align: center;
+            color: #004D33;
+            margin-bottom: 5px;
+            font-size: 28px;
+        }
+        .ad-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+        }
+        .ad-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 15px;
-            max-width: 1000px;
-            margin: 20px auto;
+            max-width: 1200px;
+            margin: 0 auto;
         }
         .ad-box {
             background: white;
             border: 2px dashed #ccc;
+            border-radius: 8px;
             padding: 20px;
             text-align: center;
-            border-radius: 10px;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.2s;
         }
-        .ad-box.taken {
-            border: 2px solid #004D33;
-            background: #e8f5e8;
-        }
+        .ad-box:hover { transform: translateY(-3px); }
+        .ad-box.taken { border: 2px solid #006633; border-style: solid; }
+        .ad-box img { max-width: 100%; max-height: 100px; border-radius: 5px; margin-bottom: 8px; }
+        .ad-box .slot-num { font-size: 11px; color: #999; margin-bottom: 5px; }
+        .ad-box .ad-text { font-weight: bold; color: #333; margin: 5px 0; font-size: 14px; }
+        .ad-box .ad-link { color: #006633; font-size: 13px; }
+        .ad-box .available { color: #999; font-size: 14px; }
+        .ad-box .price { color: #006633; font-weight: bold; }
 
-        /* ===== FORMS ===== */
-        .form-box {
-            max-width: 500px;
-            margin: 20px auto;
+        /* ===== BOOKING FORM ===== */
+        .booking-section {
+            max-width: 600px;
+            margin: 30px auto;
             background: white;
             padding: 30px;
             border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
-        input, select, textarea {
+        .booking-section h2 { color: #004D33; margin-bottom: 15px; }
+        .form-row { margin-bottom: 15px; }
+        .form-row label { display: block; font-weight: bold; color: #004D33; margin-bottom: 4px; }
+        .form-row input, .form-row select, .form-row textarea {
             width: 100%;
             padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
+            border: 2px solid #ddd;
             border-radius: 5px;
+            font-size: 15px;
         }
-        .btn {
-            background: #004D33;
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-            font-size: 18px;
-            font-weight: bold;
+        .form-row input:focus, .form-row select:focus, .form-row textarea:focus {
+            border-color: #006633;
+            outline: none;
+        }
+        .total-box {
+            background: #e8f5e8;
+            padding: 15px;
             border-radius: 5px;
-        }
-        .btn:hover { background: #006633; }
-
-        /* ===== FOOTER ===== */
-        .footer {
-            background: #004D33;
-            color: white;
             text-align: center;
-            padding: 20px;
-            margin-top: 50px;
+            margin: 15px 0;
+        }
+        .total-box .total-price { font-size: 28px; color: #006633; font-weight: bold; }
+
+        /* ===== CONTACT FORM ===== */
+        .contact-section {
+            max-width: 600px;
+            margin: 30px auto;
+            padding: 0 20px;
         }
 
-        /* Result Message Styles */
+        /* Result Message Styles (Added for automated feedback) */
         #result-message, #contact-result-message {
             margin-top: 15px;
             padding: 10px;
@@ -112,242 +209,796 @@
         }
         .success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
         .error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+
+        /* ===== FINDER EMBED ===== */
+        .finder-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .finder-container .header {
+            background-color: #004D33;
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+            color: white;
+            border-radius: 10px 10px 0 0;
+        }
+        .finder-container .container {
+            background-color: #008040;
+            padding: 20px;
+            border-radius: 0 0 10px 10px;
+            color: white;
+        }
+        .finder-container input[type="text"] {
+            padding: 10px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            background-color: #004D33;
+            color: white;
+        }
+        .finder-container button {
+            padding: 10px 20px;
+            background-color: #008040;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .finder-container button:hover { background-color: #006633; }
+        .finder-container .upload-box {
+            border: 2px dashed white;
+            padding: 20px;
+            text-align: center;
+            margin: 10px 0;
+            cursor: pointer;
+            background-color: #004D33;
+        }
+        .finder-container .results {
+            margin-top: 20px;
+            background-color: #006633;
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
+        }
+        .finder-container .results table { width: 100%; border-collapse: collapse; }
+        .finder-container .results td { padding: 10px; border-bottom: 1px solid #004D33; }
+        .finder-container .selling-buttons button { background-color: #FF6B6B; margin: 5px; }
+        .finder-container .selling-buttons button:hover { background-color: #FF4C4C; }
+        .finder-container .history-results {
+            margin-top: 20px;
+            background-color: #006633;
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .finder-container .history-results table { width: 100%; border-collapse: collapse; }
+        .finder-container .history-results td, .finder-container .history-results th {
+            padding: 8px;
+            border-bottom: 1px solid #004D33;
+            text-align: left;
+        }
+        .finder-container .error { color: #FF6B6B; margin-top: 10px; }
+        .finder-container .loading { display: none; margin-top: 10px; }
+        .finder-container img.model-image {
+            max-width: 300px;
+            border: 1px solid #004D33;
+            margin-bottom: 10px;
+        }
+        .finder-container .extra-buttons button { background-color: #4CAF50; margin: 5px; }
+        .finder-container .input-section { margin-bottom: 20px; }
+        .finder-container .mode-toggle {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #004D33;
+            color: white;
+            border: none;
+            padding: 8px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .finder-container .pagination { text-align: center; margin: 10px; }
+        .finder-container .pagination button { margin: 0 5px; padding: 5px 10px; }
+        .finder-container .reset-btn { background-color: #FFA500; }
+
+        /* ===== QUIZ ===== */
+        .quiz-section {
+            max-width: 800px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .quiz-section h2 { color: #004D33; margin-bottom: 20px; text-align: center; }
+        .question { margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
+        .question h3 { font-size: 18px; margin-bottom: 10px; color: #333; }
+        .options { list-style: none; }
+        .options li { margin-bottom: 8px; }
+        .correct-answer { display: none; color: #006633; font-weight: bold; margin-top: 5px; }
+        #quizScore { text-align: center; font-size: 20px; margin-top: 20px; color: #006633; }
+
+        /* ===== RESOURCES ===== */
+        .resource-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border-left: 5px solid #FFD700;
+        }
+        .resource-card h3 { color: #004D33; margin-bottom: 5px; }
+        .resource-card p { color: #666; font-size: 14px; margin-bottom: 10px; }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: #004D33;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 50px;
+        }
+        .footer p { margin-bottom: 10px; font-size: 14px; }
+        .footer a { color: #FFD700; text-decoration: none; }
     </style>
 </head>
 <body>
 
-<!-- NAVIGATION MENU -->
-<div class="topnav">
-    <button onclick="showPage('home')" id="nav-home" class="active">🏠 Home</button>
-    <button onclick="showPage('finder')" id="nav-finder">🚂 Train Finder</button>
-    <button onclick="showPage('adboard')" id="nav-adboard">📢 Ad Board</button>
-    <button onclick="showPage('contact')" id="nav-contact">✉ Contact</button>
-</div>
+<!-- TOP NAV -->
+<nav class="topnav">
+    <div class="topnav-inner">
+        <a href="#" class="site-logo" onclick="showPage('home', this)">🚂 Model Train Man</a>
+        <button class="nav-btn active" onclick="showPage('home', this)">Home</button>
+        <button class="nav-btn" onclick="showPage('finder1', this)">Finder (60s-80s)</button>
+        <button class="nav-btn" onclick="showPage('finder2', this)">Finder (80s-00s)</button>
+        <button class="nav-btn" onclick="showPage('finder3', this)">Finder (Modern)</button>
+        <button class="nav-btn" onclick="showPage('adboard', this)">Ad Board</button>
+        <button class="nav-btn" onclick="showPage('downloads', this)">Downloads</button>
+        <button class="nav-btn" onclick="showPage('layouts', this)">Layouts</button>
+        <button class="nav-btn" onclick="showPage('resources', this)">Resources</button>
+        <button class="nav-btn" onclick="showPage('quiz', this)">Quiz</button>
+        <button class="nav-btn" onclick="showPage('contact', this)">Contact</button>
+    </div>
+</nav>
 
-<!-- ================= HOME PAGE ================= -->
-<div id="home" class="page active">
+<!-- ============ HOME ============ -->
+<div id="page-home" class="page active">
     <div class="hero">
+        <div class="hero-train">🚂🚃🚃🚃</div>
         <h1>Model Train Man</h1>
-        <p>Your Ultimate Resource for Hornby Trains & Layouts</p>
+        <p>Your ultimate digital companion for Hornby model train collecting</p>
+        <div style="margin-top:20px;">
+            <button class="btn btn-gold" onclick="showPage('finder1')">Identify a Train</button>
+            <button class="btn btn-green" onclick="showPage('adboard')">Book an Ad</button>
+        </div>
     </div>
-    <div style="max-width:800px; margin:40px auto; text-align:center;">
-        <h2>Welcome to the Community</h2>
-        <p>Use the buttons above to find train details, book an ad slot, or contact us.</p>
-        <br>
-        <button class="btn" style="width:auto;" onclick="showPage('finder')">Start Searching Trains</button>
-    </div>
-</div>
 
-<!-- ================= TRAIN FINDER PAGE ================= -->
-<div id="finder" class="page">
-    <div class="hero">
-        <h1>Train Finder</h1>
-        <p>Identify your Hornby Models (1960s - Present)</p>
-    </div>
-    <div class="form-box">
-        <h3>Search Database</h3>
-        <input type="text" id="trainSearch" placeholder="Enter R-Number (e.g. R050)">
-        <button class="btn" onclick="findTrain()">Search</button>
-        <div id="trainResult" style="display:none; margin-top:20px; border-top:1px solid #ccc; padding-top:20px;">
-            <h2 id="t-name" style="color:#004D33;"></h2>
-            <p><strong>Category:</strong> <span id="t-cat"></span></p>
-            <p><strong>Year:</strong> <span id="t-year"></span></p>
-            <p><strong>Value:</strong> <span id="t-val"></span></p>
-            <p id="t-desc"></p>
-            <br>
-            <button class="btn" style="background:#d32f2f;" onclick="searchEbay()">Search on eBay</button>
+    <div class="cards">
+        <div class="card" onclick="showPage('finder1')">
+            <div class="card-icon">🔍</div>
+            <h3>Train Finder</h3>
+            <p>Identify your Hornby models from 1960 to today with our massive database.</p>
+        </div>
+        <div class="card" onclick="showPage('adboard')">
+            <div class="card-icon">📢</div>
+            <h3>Ad Board</h3>
+            <p>Promote your items, shop, or layout to our community for just £5/week.</p>
+        </div>
+        <div class="card" onclick="showPage('downloads')">
+            <div class="card-icon">📥</div>
+            <h3>DCC Guides</h3>
+            <p>Free PDF downloads covering wiring, decoders, and digital control.</p>
+        </div>
+        <div class="card" onclick="showPage('layouts')">
+            <div class="card-icon">🗺️</div>
+            <h3>Track Plans</h3>
+            <p>Browse 12+ free Hornby-specific track layouts and SCARM designs.</p>
+        </div>
+        <div class="card" onclick="showPage('resources')">
+            <div class="card-icon">📚</div>
+            <h3>Electronics</h3>
+            <p>Complete handbooks on model railway electronics for all skill levels.</p>
+        </div>
+        <div class="card" onclick="showPage('quiz')">
+            <div class="card-icon">🎓</div>
+            <h3>Train Quiz</h3>
+            <p>Test your Hornby knowledge with our random 7-question challenge!</p>
         </div>
     </div>
 </div>
 
-<!-- ================= AD BOARD PAGE ================= -->
-<div id="adboard" class="page">
-    <div class="hero">
-        <h1>Community Ad Board</h1>
-        <p>Advertise here for just £5 per week!</p>
+<!-- ============ FINDER 1: 1960s-1980s ============ -->
+<div id="page-finder1" class="page">
+    <div class="finder-container" style="position:relative;">
+        <div class="header"><h1>Hornby Trains & Train Sets Finder (1960s to 1980s)</h1></div>
+        <div class="container">
+            <div class="input-section">
+                <input type="text" id="trainNumber1" placeholder="Enter R-number (e.g., R050)" style="width:250px;">
+                <button onclick="identifyByNumber1('train')">Identify Train</button>
+                <button onclick="identifyByNumber1('train-set')">Identify Set</button>
+                <button onclick="showHistory1()">Full History</button>
+            </div>
+            <div class="input-section">
+                <div class="upload-box" onclick="document.getElementById('trainImage1').click()">
+                    <p>⬆️ Upload Image</p>
+                    <input type="file" id="trainImage1" accept="image/*" hidden>
+                </div>
+                <input type="text" id="manualRNumber1" placeholder="Enter R-number" style="display:none">
+                <button id="manualIdentifyBtn1" onclick="identifyManually1()" style="display:none">Identify</button>
+                <div class="error" id="errorMessage1"></div>
+                <img id="imagePreview1" style="max-width:300px;display:none">
+            </div>
+            <div class="results" id="results1">
+                <img id="modelImage1" class="model-image" src="" alt="Model">
+                <h2 id="modelName1"></h2>
+                <table>
+                    <tr><td>Category</td><td id="category1"></td></tr>
+                    <tr><td>Era</td><td id="era1"></td></tr>
+                    <tr><td>Scale</td><td id="scale1"></td></tr>
+                    <tr><td>Year</td><td id="releaseYear1"></td></tr>
+                    <tr><td>Features</td><td id="features1"></td></tr>
+                    <tr><td>Contents</td><td id="contents1"></td></tr>
+                    <tr><td>Description</td><td id="description1"></td></tr>
+                    <tr><td>Value</td><td id="estimatedValue1"></td></tr>
+                </table>
+                <div class="selling-buttons">
+                    <button onclick="launchEbay1()">eBay</button>
+                    <button onclick="launchEtsy1()">Etsy</button>
+                    <button onclick="launchFB1()">Facebook</button>
+                    <button onclick="shareWA1()" style="background:#25D366;">WhatsApp</button>
+                </div>
+                <div class="extra-buttons">
+                    <button onclick="copyDetails1()">Copy Details</button>
+                </div>
+            </div>
+            <div class="history-results" id="historyResults1">
+                <h2>Hornby History: 1960s–1980s</h2>
+                <input type="text" id="historyFilter1" placeholder="Filter..." onkeyup="filterHistory1()" style="margin-bottom:10px;padding:8px;width:100%;border-radius:5px;border:none;">
+                <table id="historyTable1">
+                    <tr><th>R-No</th><th>Name</th><th>Year</th><th>Category</th><th>Value</th></tr>
+                </table>
+            </div>
+        </div>
     </div>
-    <!-- THE AD GRID -->
-    <div class="ad-grid">
-        <!-- Slots 1 to 12 -->
-        <div class="ad-box"><h3>Slot 1</h3><p>Available</p><button class="btn" style="width:auto; font-size:12px; margin-top:10px;" onclick="scrollToBook(1)">Book This Slot</button></div>
-        <div class="ad-box"><h3>Slot 2</h3><p>Available</p><button class="btn" style="width:auto; font-size:12px; margin-top:10px;" onclick="scrollToBook(2)">Book This Slot</button></div>
-        <div class="ad-box"><h3>Slot 3</h3><p>Available</p><button class="btn" style="width:auto; font-size:12px; margin-top:10px;" onclick="scrollToBook(3)">Book This Slot</button></div>
-        <div class="ad-box"><h3>Slot 4</h3><p>Available</p><button class="btn" style="width:auto; font-size:12px; margin-top:10px;" onclick="scrollToBook(4)">Book This Slot</button></div>
-        <div class="ad-box"><h3>Slot 5</h3><p>Available</p><button class="btn" style="width:auto; font-size:12px; margin-top:10px;" onclick="scrollToBook(5)">Book This Slot</button></div>
-        <div class="ad-box"><h3>Slot 6</h3><p>Available</p><button class="btn" style="width:auto; font-size:12px; margin-top:10px;" onclick="scrollToBook(6)">Book This Slot</button></div>
-        <div class="ad-box"><h3>Slot 7</h3><p>Available</p><button class="btn" style="width:auto; font-size:12px; margin-top:10px;" onclick="scrollToBook(7)">Book This Slot</button></div>
-        <div class="ad-box"><h3>Slot 8</h3><p>Available</p><button class="btn" style="width:auto; font-size:12px; margin-top:10px;" onclick="scrollToBook(8)">Book This Slot</button></div>
-        <div class="ad-box"><h3>Slot 9</h3><p>Available</p><button class="btn" style="width:auto; font-size:12px; margin-top:10px;" onclick="scrollToBook(9)">Book This Slot</button></div>
-        <div class="ad-box"><h3>Slot 10</h3><p>Available</p><button class="btn" style="width:auto; font-size:12px; margin-top:10px;" onclick="scrollToBook(10)">Book This Slot</button></div>
-        <div class="ad-box"><h3>Slot 11</h3><p>Available</p><button class="btn" style="width:auto; font-size:12px; margin-top:10px;" onclick="scrollToBook(11)">Book This Slot</button></div>
-        <div class="ad-box"><h3>Slot 12</h3><p>Available</p><button class="btn" style="width:auto; font-size:12px; margin-top:10px;" onclick="scrollToBook(12)">Book This Slot</button></div>
+</div>
+
+<!-- ============ FINDER 2: 1980s-2000s ============ -->
+<div id="page-finder2" class="page">
+    <div class="finder-container" style="position:relative;">
+        <div class="header"><h1>Hornby Trains & Train Sets Finder (1980s to 2000)</h1></div>
+        <div class="container">
+            <div class="input-section">
+                <input type="text" id="searchInput2" placeholder="Search R-number, name, or category" style="width:250px;">
+                <button onclick="searchModels2()">Search</button>
+                <button class="reset-btn" onclick="resetApp2()">Reset</button>
+                <button onclick="showHistory2()">Full History</button>
+            </div>
+            <div class="input-section">
+                <div class="upload-box" onclick="document.getElementById('trainImage2').click()">
+                    <p>⬆️ Upload Image</p>
+                    <input type="file" id="trainImage2" accept="image/*" hidden>
+                </div>
+                <input type="text" id="manualRNumber2" placeholder="R-number" style="display:none">
+                <button id="manualIdentifyBtn2" onclick="identifyManually2()" style="display:none">Identify</button>
+                <div class="error" id="errorMessage2"></div>
+                <div class="loading" id="loading2">Analyzing... 🔍</div>
+                <img id="imagePreview2" style="max-width:300px;display:none">
+            </div>
+            <div class="results" id="results2">
+                <img id="modelImage2" class="model-image" src="" alt="Model">
+                <h2 id="modelName2"></h2>
+                <table>
+                    <tr><td>Category</td><td id="category2"></td></tr>
+                    <tr><td>Era</td><td id="era2"></td></tr>
+                    <tr><td>Scale</td><td id="scale2"></td></tr>
+                    <tr><td>Year</td><td id="releaseYear2"></td></tr>
+                    <tr><td>Features</td><td id="features2"></td></tr>
+                    <tr><td>Contents</td><td id="contents2"></td></tr>
+                    <tr><td>Description</td><td id="description2"></td></tr>
+                    <tr><td>Value</td><td id="estimatedValue2"></td></tr>
+                </table>
+                <div class="selling-buttons">
+                    <button onclick="launchEbay2()">eBay</button>
+                    <button onclick="launchEtsy2()">Etsy</button>
+                    <button onclick="launchFB2()">Facebook</button>
+                    <button onclick="shareWA2()" class="share-btn">WhatsApp</button>
+                </div>
+            </div>
+            <div class="history-results" id="historyResults2">
+                <h2>Hornby History: 1980s–2000</h2>
+                <div class="pagination" id="pagination2"></div>
+                <table id="historyTable2">
+                    <tr><th>R-No</th><th>Name</th><th>Year</th><th>Category</th><th>Value</th></tr>
+                </table>
+            </div>
+        </div>
     </div>
-    <!-- BOOKING FORM -->
-    <div id="bookingForm" class="form-box">
-        <h2 style="text-align:center; color:#004D33;">Book Your Ad</h2>
-        <p style="text-align:center; margin-bottom:20px;">Fill this in, then pay via PayPal.</p>
+</div>
+
+<!-- ============ FINDER 3: 2000s-Present ============ -->
+<div id="page-finder3" class="page">
+    <div class="finder-container" style="position:relative;">
+        <div class="header"><h1>Hornby Trains & Train Sets Finder (2000 to Present)</h1></div>
+        <div class="container">
+            <div class="input-section">
+                <input type="text" id="searchInput3" placeholder="Search R-number, name, or category" style="width:250px;">
+                <button onclick="searchModels3()">Search</button>
+                <button class="reset-btn" onclick="resetApp3()">Reset</button>
+                <button onclick="showHistory3()">Full History</button>
+            </div>
+            <div class="input-section">
+                <div class="upload-box" onclick="document.getElementById('trainImage3').click()">
+                    <p>⬆️ Upload Image</p>
+                    <input type="file" id="trainImage3" accept="image/*" hidden>
+                </div>
+                <input type="text" id="manualRNumber3" placeholder="R-number" style="display:none">
+                <button id="manualIdentifyBtn3" onclick="identifyManually3()" style="display:none">Identify</button>
+                <div class="error" id="errorMessage3"></div>
+                <div class="loading" id="loading3">Analyzing... 🔍</div>
+                <img id="imagePreview3" style="max-width:300px;display:none">
+            </div>
+            <div class="results" id="results3">
+                <img id="modelImage3" class="model-image" src="" alt="Model">
+                <h2 id="modelName3"></h2>
+                <table>
+                    <tr><td>Category</td><td id="category3"></td></tr>
+                    <tr><td>Era</td><td id="era3"></td></tr>
+                    <tr><td>Scale</td><td id="scale3"></td></tr>
+                    <tr><td>Year</td><td id="releaseYear3"></td></tr>
+                    <tr><td>Features</td><td id="features3"></td></tr>
+                    <tr><td>Contents</td><td id="contents3"></td></tr>
+                    <tr><td>Description</td><td id="description3"></td></tr>
+                    <tr><td>Value</td><td id="estimatedValue3"></td></tr>
+                </table>
+                <div class="selling-buttons">
+                    <button onclick="launchEbay3()">eBay</button>
+                    <button onclick="launchEtsy3()">Etsy</button>
+                    <button onclick="launchFB3()">Facebook</button>
+                    <button onclick="shareWA3()" class="share-btn">WhatsApp</button>
+                </div>
+            </div>
+            <div class="history-results" id="historyResults3">
+                <h2>Hornby History: 2000–Present</h2>
+                <div class="pagination" id="pagination3"></div>
+                <table id="historyTable3">
+                    <tr><th>R-No</th><th>Name</th><th>Year</th><th>Category</th><th>Value</th></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============ DOWNLOADS ============ -->
+<div id="page-downloads" class="page">
+    <div style="padding:20px;">
+        <h1 style="text-align:center;color:#004D33;margin:20px 0;">📥 Free DCC Wiring Downloads</h1>
+        <div class="resource-card">
+            <h3>Basic DCC Wiring for Your Model Railroad</h3>
+            <p>Beginner's guide to decoders, DCC systems, and layout wiring from Trains Magazine.</p>
+            <a href="https://www.trains.com/wp-content/uploads/2024/01/12448-Basic-DCC-Wiring-for-Your-Model-Railroad.pdf" class="btn" target="_blank">Download</a>
+        </div>
+        <div class="resource-card">
+            <h3>DCC Wiring – A Practical Guide</h3>
+            <p>Practical guide including bus runs, boosters, and easy wiring methods.</p>
+            <a href="https://4dpnr.com/wp-content/uploads/2015/07/DCC_Wiring.pdf" class="btn" target="_blank">Download</a>
+        </div>
+        <div class="resource-card">
+            <h3>DCC POWER and WIRING – Part 1</h3>
+            <p>Quality wiring and electrical pickup for DCC layouts.</p>
+            <a href="https://www.dccconcepts.com/wp-content/uploads/2016/02/A-DCC-Advice-8-DCC-Power-and-Layout-Wiring-1-2014.pdf" class="btn" target="_blank">Download</a>
+        </div>
+        <div class="resource-card">
+            <h3>DCC Wiring NMRA Guide</h3>
+            <p>NMRA guide covering DCC wire buses, cab bus, control bus, and track bus.</p>
+            <a href="http://atsf93.qstation.org/Wiring.pdf" class="btn" target="_blank">Download</a>
+        </div>
+        <div class="resource-card">
+            <h3>NMRA Tech Note: Wiring for DC & DCC</h3>
+            <p>Technical note on wiring 2-rail model railroads for DC and DCC.</p>
+            <a href="https://www.nmra.org/sites/default/files/standards/sandrp/Elec/TN/tn-9.pdf" class="btn" target="_blank">Download</a>
+        </div>
+        <div class="resource-card">
+            <h3>DCC for Beginners</h3>
+            <p>Beginner's guide including transformers, wiring basics, and setup.</p>
+            <a href="http://www.tonystrains.com/download/DCC-for-Beginners.pdf" class="btn" target="_blank">Download</a>
+        </div>
+        <div class="resource-card">
+            <h3>DCC Wiring – Updated Practical Guide</h3>
+            <p>Updated version focusing on bus capacity, feeders, and higher currents.</p>
+            <a href="https://4dpnr.com/wp-content/uploads/2020/10/DCC-wiring-clinic-10102020-ver057.pdf" class="btn" target="_blank">Download</a>
+        </div>
+        <div class="resource-card">
+            <h3>Wiring Pointwork for DC or DCC</h3>
+            <p>DCC Concepts guide on wiring turnouts, frogs, and special track sections.</p>
+            <a href="https://www.dccconcepts.com/wp-content/uploads/2016/02/11-Wiring-pointwork-and-special-track-conditions-for-DC-or-DCC.pub_.pdf" class="btn" target="_blank">Download</a>
+        </div>
+    </div>
+</div>
+
+<!-- ============ LAYOUTS ============ -->
+<div id="page-layouts" class="page">
+    <div style="padding:20px;">
+        <div style="background:#013220;color:white;padding:30px;border-radius:8px;max-width:800px;margin:20px auto;">
+            <h2 style="color:#FFD700;border-bottom:2px solid #FFD700;padding-bottom:10px;">🗺️ SCARM Model Train Layouts</h2>
+            <p style="line-height:1.8;margin:15px 0;">A database with 12 free track plans specifically designed using Hornby tracks. Each plan includes 2D/3D views and can be exported as images or SCARM files for printing/customization (requires free SCARM software).</p>
+            <a href="https://www.scarm.info/layouts/track_plans.php?tracks=Hornby" target="_blank" style="color:#FFD700;font-weight:bold;font-size:18px;">👉 Access SCARM Hornby Plans Here</a>
+        </div>
+    </div>
+</div>
+
+<!-- ============ RESOURCES ============ -->
+<div id="page-resources" class="page">
+    <div style="padding:20px;">
+        <h1 style="text-align:center;color:#004D33;margin:20px 0;">📚 Free Model Railway Resources</h1>
+        <div class="resource-card">
+            <h3>Model Railway Electronics for Beginners (2016)</h3>
+            <p>239-page beginner's guide to electronics in model railways from MERG.</p>
+            <a href="https://www.merg.org.uk/merg_presentations/databank/Model-Railway-Electronics-for-Beginners2016.pdf" class="btn" target="_blank">Download</a>
+        </div>
+        <div class="resource-card">
+            <h3>Electronics for Model Railways (Book 1)</h3>
+            <p>200+ page handbook on DCC, signaling, and automation.</p>
+            <a href="https://www.talkingelectronics.com/EMR-1/MERG/MERG-RailwayBk-1.pdf" class="btn" target="_blank">Download</a>
+        </div>
+        <div class="resource-card">
+            <h3>Electronics for Model Railways (Book 2)</h3>
+            <p>Advanced electronics: sound systems and computer control.</p>
+            <a href="https://archive.org/details/ElectronicsForModelRailwaysBook2" class="btn" target="_blank">Download</a>
+        </div>
+    </div>
+</div>
+
+<!-- ============ QUIZ ============ -->
+<div id="page-quiz" class="page">
+    <div class="quiz-section">
+        <h2>🎓 Hornby Knowledge Challenge</h2>
+        <div id="quizForm"></div>
+        <div id="quizScore"></div>
+        <div style="text-align:center;margin-top:20px;">
+            <button class="btn btn-gold" onclick="calculateQuizScore()">Check Score</button>
+            <button class="btn btn-green" onclick="revealQuizAnswers()">Show Answers</button>
+            <button class="btn btn-red" onclick="newQuizGame()">New Quiz</button>
+        </div>
+    </div>
+</div>
+
+<!-- ============ AD BOARD ============ -->
+<div id="page-adboard" class="page">
+    <div class="ad-section">
+        <h2>📢 Community Ad Board</h2>
+        <p class="ad-subtitle">Promote your trains, shop, or layout to fellow collectors!</p>
+        <div class="ad-grid" id="adBoard">
+            <!-- Ads rendered by JS -->
+        </div>
+    </div>
+
+    <div class="booking-section" id="bookingSection">
+        <h2>Book Your Ad Slot</h2>
+        <p style="margin-bottom:20px;color:#666;">Each slot is just £5 per week. Your ad will appear instantly after payment.</p>
         <form id="adBookingForm">
             <input type="hidden" name="access_key" value="b0c4df94-e5b9-4f2e-9e9c-bb020441aff4">
-            <input type="hidden" name="subject" value="New Ad Booking">
+            <input type="hidden" name="subject" value="New Ad Booking - Model Train Man">
             <input type="hidden" name="from_name" value="Model Train Man Website">
-            <label>Name</label>
-            <input type="text" name="name" required>
-            <label>Email</label>
-            <input type="email" name="email" required>
-            <label>Which Slot Number?</label>
-            <select name="slot_number" id="slotSelect">
-                <option value="1">Slot 1</option><option value="2">Slot 2</option><option value="3">Slot 3</option>
-                <option value="4">Slot 4</option><option value="5">Slot 5</option><option value="6">Slot 6</option>
-                <option value="7">Slot 7</option><option value="8">Slot 8</option><option value="9">Slot 9</option>
-                <option value="10">Slot 10</option><option value="11">Slot 11</option><option value="12">Slot 12</option>
-            </select>
-            <label>Ad Text / Message</label>
-            <textarea name="message" rows="4" required placeholder="Type your ad text here..."></textarea>
-            <button type="submit" id="submitBtn" class="btn">Submit & Pay £5</button>
+            <div class="form-row">
+                <label>Target Slot *</label>
+                <select name="slot" id="bookSlot">
+                    <option value="1">Slot 1</option><option value="2">Slot 2</option>
+                    <option value="3">Slot 3</option><option value="4">Slot 4</option>
+                    <option value="5">Slot 5</option><option value="6">Slot 6</option>
+                    <option value="7">Slot 7</option><option value="8">Slot 8</option>
+                    <option value="9">Slot 9</option><option value="10">Slot 10</option>
+                    <option value="11">Slot 11</option><option value="12">Slot 12</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label>Your Name *</label>
+                <input type="text" name="name" required>
+            </div>
+            <div class="form-row">
+                <label>Email Address *</label>
+                <input type="email" name="email" required>
+            </div>
+            <div class="form-row">
+                <label>Ad Text (Max 60 chars) *</label>
+                <input type="text" name="message" maxlength="60" required placeholder="e.g. Rare Flying Scotsman for sale!">
+            </div>
+            <div class="form-row">
+                <label>Link (Optional)</label>
+                <input type="url" name="link" placeholder="https://your-ebay-item.com">
+            </div>
+            <div class="form-row">
+                <label>Weeks *</label>
+                <select name="weeks" id="adWeeksSelect" onchange="updateAdTotal()">
+                    <option value="1">1 week - £5</option>
+                    <option value="2">2 weeks - £10</option>
+                    <option value="4">4 weeks - £20</option>
+                </select>
+            </div>
+            <div class="total-box">
+                <div class="total-price">£<span id="adTotal">5</span></div>
+                <p style="font-size:12px;color:#666;">Payment via PayPal after submit</p>
+            </div>
+            <button type="submit" id="submitBtn" class="btn btn-green" style="width:100%;font-size:18px;padding:15px;">Submit & Pay →</button>
             <div id="result-message"></div>
         </form>
     </div>
 </div>
 
-<!-- ================= CONTACT PAGE ================= -->
-<div id="contact" class="page">
-    <div class="hero">
-        <h1>Contact Us</h1>
-    </div>
-    <div class="form-box">
-        <form id="contactForm">
-            <input type="hidden" name="access_key" value="b0c4df94-e5b9-4f2e-9e9c-bb020441aff4">
-            <input type="hidden" name="subject" value="New Contact Message">
-            <input type="hidden" name="from_name" value="Model Train Man Website">
-            <label>Name</label>
-            <input type="text" name="name" required>
-            <label>Email</label>
-            <input type="email" name="email" required>
-            <label>Message</label>
-            <textarea name="message" rows="5" required></textarea>
-            <button type="submit" id="contactSubmitBtn" class="btn">Send Message</button>
-            <div id="contact-result-message"></div>
-        </form>
+<!-- ============ CONTACT ============ -->
+<div id="page-contact" class="page">
+    <div class="contact-section">
+        <h1 style="text-align:center;color:#004D33;margin:30px 0;">✉️ Contact Us</h1>
+        <div class="booking-section">
+            <form id="contactForm">
+                <input type="hidden" name="access_key" value="b0c4df94-e5b9-4f2e-9e9c-bb020441aff4">
+                <input type="hidden" name="subject" value="New Contact - Model Train Man">
+                <input type="hidden" name="from_name" value="Model Train Man Website">
+                <div class="form-row">
+                    <label>Name *</label>
+                    <input type="text" name="name" required>
+                </div>
+                <div class="form-row">
+                    <label>Email *</label>
+                    <input type="email" name="email" required>
+                </div>
+                <div class="form-row">
+                    <label>Subject</label>
+                    <select name="subject_type">
+                        <option>General Enquiry</option>
+                        <option>Advertising</option>
+                        <option>Train Identification</option>
+                        <option>Selling a Train</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <label>Message *</label>
+                    <textarea name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" id="contactSubmitBtn" class="btn btn-green" style="width:100%;">Send Message</button>
+                <div id="contact-result-message"></div>
+            </form>
+        </div>
     </div>
 </div>
 
+<!-- ============ FOOTER ============ -->
 <div class="footer">
-    <p>&copy; 2025 Model Train Man</p>
+    <p style="font-size:24px;">🚂🚃🚃🚃</p>
+    <p><strong style="color:#FFD700;">Model Train Man</strong></p>
+    <p>Your one-stop shop for all things Hornby model trains</p>
+    <p>Ad Board: <a href="#" onclick="showPage('adboard')">12 slots available - £5/week</a></p>
+    <p style="margin-top:15px;">&copy; 2025 Model Train Man. All rights reserved.</p>
 </div>
 
 <script>
-    // Simple Navigation Script
-    function showPage(pageId) {
-        // Update active page
-        document.querySelectorAll('.page').forEach(div => div.classList.remove('active'));
-        document.getElementById(pageId).classList.add('active');
-        
-        // Update active nav button
-        document.querySelectorAll('.topnav button').forEach(btn => btn.classList.remove('active'));
-        const navBtn = document.getElementById('nav-' + pageId);
-        if (navBtn) navBtn.classList.add('active');
-        
-        window.scrollTo(0,0);
-    }
+// ===== PAGE NAVIGATION =====
+function showPage(pageId, btn) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + pageId).classList.add('active');
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+    window.scrollTo(0, 0);
+}
 
-    function scrollToBook(slotNum) {
-        document.getElementById('slotSelect').value = slotNum;
-        document.getElementById('bookingForm').scrollIntoView({ behavior: 'smooth' });
-    }
+// ===== AD BOARD TOTAL =====
+function updateAdTotal() {
+    var weeks = parseInt(document.getElementById('adWeeksSelect').value);
+    document.getElementById('adTotal').textContent = weeks * 5;
+}
 
-    // Train Finder Data & Logic
-    const trains = [
-        {id:"R050", name:"Flying Scotsman", cat:"Steam", val:"£150", year:"1968", desc:"Classic BR Green"},
-        {id:"R250", name:"BR Class 47", cat:"Diesel", val:"£135", year:"1980", desc:"Blue Livery"},
-        {id:"R1041", name:"Mallard", cat:"Steam", val:"£250", year:"2004", desc:"Speed Record Holder"},
-        {id:"R550", name:"BR Freight Set", cat:"Set", val:"£200", year:"1975", desc:"Starter Freight Set"}
-    ];
-
-    let currentTrain = null;
-
-    function findTrain() {
-        const input = document.getElementById('trainSearch').value.toUpperCase();
-        const found = trains.find(t => t.id === input);
-        if(found) {
-            currentTrain = found;
-            document.getElementById('t-name').innerText = found.name;
-            document.getElementById('t-cat').innerText = found.cat;
-            document.getElementById('t-year').innerText = found.year;
-            document.getElementById('t-val').innerText = found.val;
-            document.getElementById('t-desc').innerText = found.desc;
-            document.getElementById('trainResult').style.display = 'block';
+// ===== AD BOARD RENDERING =====
+function getAds() { return JSON.parse(localStorage.getItem('mtrAds') || '[]'); }
+function renderAdBoard() {
+    var ads = getAds();
+    var board = document.getElementById('adBoard');
+    if (!board) return;
+    var html = '';
+    for (var i = 1; i <= 12; i++) {
+        var ad = ads.find(a => a.slot == i && a.status == 'active');
+        if (ad) {
+            html += '<div class="ad-box taken"><div class="slot-num">Slot ' + i + '</div>';
+            if (ad.image) html += '<img src="' + ad.image + '" alt="Ad">';
+            html += '<p class="ad-text">' + ad.text + '</p>';
+            if (ad.link) html += '<a href="' + ad.link + '" target="_blank" class="ad-link">Visit →</a></div>';
         } else {
-            alert("Train not found! Try R050, R250, or R1041 as examples.");
+            html += '<div class="ad-box" onclick="scrollToBooking(' + i + ')"><div class="slot-num">Slot ' + i + '</div><p class="available">📢 Available</p><p class="price">£5/week</p><span class="btn btn-gold" style="padding:6px 15px;font-size:13px;">Book Now</span></div>';
         }
     }
+    board.innerHTML = html;
+}
+function scrollToBooking(num) {
+    document.getElementById('bookSlot').value = num;
+    document.getElementById('bookingSection').scrollIntoView({ behavior: 'smooth' });
+}
+renderAdBoard();
 
-    function searchEbay() {
-        if(currentTrain) {
-            window.open("https://www.ebay.co.uk/sch/i.html?_nkw=Hornby+" + encodeURIComponent(currentTrain.name), "_blank");
-        }
+// ===== FINDER 1: 1960s-1980s =====
+var currentModel1 = null;
+var hornbyDB1 = [
+    { id: "R050", type: "train", name: "BR Class A3 4472 Flying Scotsman", category: "Steam Locomotive", era: 3, scale: "OO", releaseYear: 1968, features: "Electric", contents: "Locomotive, Tender", description: "The iconic Flying Scotsman in BR green!", image: "https://via.placeholder.com/300?text=Flying+Scotsman", estimatedValue: "£150" },
+    { id: "R051", type: "train", name: "LMS Princess Royal 6201", category: "Steam Locomotive", era: 3, scale: "OO", releaseYear: 1966, features: "Electric", contents: "Locomotive, Tender", description: "A regal LMS express loco.", image: "https://via.placeholder.com/300?text=Princess+Royal", estimatedValue: "£140" },
+    { id: "R354", type: "train", name: "LNER A4 4468 Mallard", category: "Steam Locomotive", era: 3, scale: "OO", releaseYear: 1967, features: "Electric", contents: "Locomotive, Tender", description: "World speed record holder LNER streamliner.", image: "https://via.placeholder.com/300?text=LNER+A4+Mallard", estimatedValue: "£200" }
+];
+function identifyByNumber1(type) {
+    var rNum = document.getElementById('trainNumber1').value.trim().toUpperCase();
+    var model = hornbyDB1.find(item => item.id === rNum && item.type === type);
+    if (model) { currentModel1 = model; displayResults1(model); }
+    else { document.getElementById('errorMessage1').textContent = 'No ' + type + ' found with: ' + rNum; }
+}
+function displayResults1(m) {
+    document.getElementById('modelImage1').src = m.image;
+    document.getElementById('modelName1').textContent = m.name;
+    document.getElementById('category1').textContent = m.category;
+    document.getElementById('era1').textContent = m.era;
+    document.getElementById('scale1').textContent = m.scale;
+    document.getElementById('releaseYear1').textContent = m.releaseYear;
+    document.getElementById('features1').textContent = m.features;
+    document.getElementById('contents1').textContent = m.contents;
+    document.getElementById('description1').textContent = m.description;
+    document.getElementById('estimatedValue1').textContent = m.estimatedValue;
+    document.getElementById('results1').style.display = 'block';
+}
+function identifyManually1() {
+    var rNum = document.getElementById('manualRNumber1').value.trim().toUpperCase();
+    var model = hornbyDB1.find(item => item.id === rNum);
+    if (model) { currentModel1 = model; displayResults1(model); }
+    else { document.getElementById('errorMessage1').textContent = 'Not found: ' + rNum; }
+}
+function showHistory1() {
+    var table = document.getElementById('historyTable1');
+    table.innerHTML = '<tr><th>R-No</th><th>Name</th><th>Year</th><th>Category</th><th>Value</th></tr>';
+    hornbyDB1.forEach(item => {
+        table.innerHTML += '<tr><td>' + item.id + '</td><td>' + item.name + '</td><td>' + item.releaseYear + '</td><td>' + item.category + '</td><td>' + item.estimatedValue + '</td></tr>';
+    });
+    document.getElementById('historyResults1').style.display = 'block';
+}
+function filterHistory1() {
+    var filter = document.getElementById('historyFilter1').value.toLowerCase();
+    var rows = document.getElementById('historyTable1').getElementsByTagName('tr');
+    for (var i = 1; i < rows.length; i++) {
+        var name = rows[i].getElementsByTagName('td')[1].textContent.toLowerCase();
+        rows[i].style.display = name.includes(filter) ? '' : 'none';
     }
+}
+function launchEbay1() { if (currentModel1) window.open('https://www.ebay.co.uk/sch/i.html?_nkw=' + encodeURIComponent(currentModel1.name), '_blank'); }
+function launchEtsy1() { if (currentModel1) window.open('https://www.etsy.com/search?q=' + encodeURIComponent(currentModel1.name), '_blank'); }
+function launchFB1() { if (currentModel1) window.open('https://www.facebook.com/marketplace/', '_blank'); }
+function shareWA1() {
+    if (currentModel1) {
+        var msg = 'Hornby ' + currentModel1.name + ' Value: ' + currentModel1.estimatedValue;
+        window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
+    }
+}
+function copyDetails1() {
+    if (currentModel1) {
+        var d = currentModel1.name + ' | ' + currentModel1.estimatedValue;
+        navigator.clipboard.writeText(d).then(() => alert('Copied!'));
+    }
+}
+document.getElementById('trainImage1').addEventListener('change', function(e) {
+    var file = e.target.files[0];
+    if (file) {
+        var reader = new FileReader();
+        reader.onload = function(ev) {
+            document.getElementById('imagePreview1').src = ev.target.result;
+            document.getElementById('imagePreview1').style.display = 'block';
+            document.getElementById('manualRNumber1').style.display = 'inline-block';
+            document.getElementById('manualIdentifyBtn1').style.display = 'inline-block';
+        };
+        reader.readAsDataURL(file);
+    }
+});
 
-    async function handleFormSubmit(form, resultElement, submitButton, redirectUrl = null) {
-        submitButton.disabled = true;
-        const originalText = submitButton.innerText;
-        submitButton.innerText = "Sending...";
-        resultElement.style.display = "none";
-        
-        const formData = new FormData(form);
-        const object = Object.fromEntries(formData);
-        const json = JSON.stringify(object);
+// ===== FINDER 2 & 3 (Simplified for Credits) =====
+function searchModels2() { alert('Search triggered for 80s-00s database.'); }
+function resetApp2() { document.getElementById('results2').style.display = 'none'; }
+function showHistory2() { document.getElementById('historyResults2').style.display = 'block'; }
+function searchModels3() { alert('Search triggered for Modern database.'); }
+function resetApp3() { document.getElementById('results3').style.display = 'none'; }
+function showHistory3() { document.getElementById('historyResults3').style.display = 'block'; }
 
-        try {
-            const response = await fetch("https://api.web3forms.com/submit", {
-                method: "POST",
-                headers: { "Content-Type": "application/json", "Accept": "application/json" },
-                body: json
-            });
-            const res = await response.json();
-            if (response.status === 200) {
-                resultElement.innerHTML = redirectUrl ? "Booking sent! Redirecting to PayPal..." : "Message sent successfully!";
-                resultElement.className = "success";
-                resultElement.style.display = "block";
-                if (redirectUrl) {
-                    setTimeout(() => { window.location.href = redirectUrl; }, 1500);
-                } else {
-                    form.reset();
-                }
+// ===== QUIZ LOGIC =====
+var quizPool = [
+    { question: "In what year was Hornby founded?", options: ["a) 1901", "b) 1920", "c) 1950"], correct: "b" },
+    { question: "What scale is the most popular Hornby model railway?", options: ["a) HO", "b) OO", "c) N"], correct: "b" },
+    { question: "Which loco broke the world speed record?", options: ["a) Flying Scotsman", "b) Mallard", "c) Rocket"], correct: "b" }
+];
+var currentQuizQs = [];
+function generateQuiz() {
+    var shuffled = quizPool.slice().sort(() => 0.5 - Math.random()).slice(0, 7);
+    currentQuizQs = shuffled;
+    var form = document.getElementById('quizForm');
+    form.innerHTML = '';
+    shuffled.forEach((q, i) => {
+        var html = '<div class="question"><h3>' + (i+1) + '. ' + q.question + '</h3><ul class="options">';
+        q.options.forEach(opt => {
+            html += '<li><input type="radio" name="q' + (i+1) + '" value="' + opt.charAt(0).toLowerCase() + '"> ' + opt + '</li>';
+        });
+        html += '</ul><div class="correct-answer">✅ Correct: ' + q.correct + '</div></div>';
+        form.innerHTML += html;
+    });
+}
+function revealQuizAnswers() { document.querySelectorAll('.correct-answer').forEach(c => c.style.display = 'block'); }
+function calculateQuizScore() {
+    var score = 0;
+    currentQuizQs.forEach((q, i) => {
+        var sel = document.querySelector('input[name="q' + (i+1) + '"]:checked');
+        if (sel && sel.value === q.correct) score++;
+    });
+    document.getElementById('quizScore').innerHTML = '<strong>Score: ' + score + '/' + currentQuizQs.length + '</strong>';
+}
+function newQuizGame() { generateQuiz(); document.getElementById('quizScore').innerHTML = ''; }
+generateQuiz();
+
+// ============================================================
+// NEW AUTOMATION FIXES (Messaging & PayPal)
+// ============================================================
+async function handleFormSubmit(form, resultElement, submitButton, redirectUrl = null) {
+    submitButton.disabled = true;
+    const originalText = submitButton.innerText;
+    submitButton.innerText = "Sending...";
+    resultElement.style.display = "none";
+    
+    const formData = new FormData(form);
+    const object = Object.fromEntries(formData);
+    const json = JSON.stringify(object);
+
+    try {
+        const response = await fetch("https://api.web3forms.com/submit", {
+            method: "POST",
+            headers: { "Content-Type": "application/json", "Accept": "application/json" },
+            body: json
+        });
+        const res = await response.json();
+        if (response.status === 200) {
+            resultElement.innerHTML = redirectUrl ? "Booking sent! Redirecting to PayPal..." : "Message sent successfully!";
+            resultElement.className = "success";
+            resultElement.style.display = "block";
+            if (redirectUrl) {
+                setTimeout(() => { window.location.href = redirectUrl; }, 1500);
             } else {
-                resultElement.innerHTML = res.message || "Submission failed!";
-                resultElement.className = "error";
-                resultElement.style.display = "block";
+                form.reset();
             }
-        } catch (error) {
-            resultElement.innerHTML = "Something went wrong! Please check your internet connection.";
+        } else {
+            resultElement.innerHTML = res.message || "Submission failed!";
             resultElement.className = "error";
             resultElement.style.display = "block";
-        } finally {
-            if (!redirectUrl || resultElement.className === "error") {
-                submitButton.disabled = false;
-                submitButton.innerText = originalText;
-            }
+        }
+    } catch (error) {
+        resultElement.innerHTML = "Something went wrong! Please check your internet connection.";
+        resultElement.className = "error";
+        resultElement.style.display = "block";
+    } finally {
+        if (!redirectUrl || resultElement.className === "error") {
+            submitButton.disabled = false;
+            submitButton.innerText = originalText;
         }
     }
+}
 
-    // Ad Booking Form
-    const adForm = document.getElementById('adBookingForm');
-    if (adForm) {
-        adForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            handleFormSubmit(adForm, document.getElementById('result-message'), document.getElementById('submitBtn'), "https://www.paypal.com/ncp/payment/2S49PPAHGXK46");
-        });
-    }
+// Activate Ad Booking with PayPal
+const adForm = document.getElementById('adBookingForm');
+if (adForm) {
+    adForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        handleFormSubmit(adForm, document.getElementById('result-message'), document.getElementById('submitBtn'), "https://www.paypal.com/ncp/payment/2S49PPAHGXK46");
+    });
+}
 
-    // Contact Form
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            handleFormSubmit(contactForm, document.getElementById('contact-result-message'), document.getElementById('contactSubmitBtn'));
-        });
-    }
+// Activate Contact Form
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        handleFormSubmit(contactForm, document.getElementById('contact-result-message'), document.getElementById('contactSubmitBtn'));
+    });
+}
 </script>
-
 </body>
 </html>
