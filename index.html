@@ -12,11 +12,11 @@
         /* ===== REALISTIC FLYING SCOTSMAN CSS MODEL ===== */
         .train-track {
             width: 100%;
-            height: 100px;
+            height: 120px;
             background: #222;
             position: relative;
             border-top: 4px solid #444;
-            border-bottom: 12px solid #333;
+            border-bottom: 14px solid #333;
             overflow: hidden;
             margin-bottom: 0;
             display: flex;
@@ -26,119 +26,209 @@
         /* The Train Container - Moves Left to Right (Forward) */
         .train-container {
             position: absolute;
-            bottom: 12px;
-            left: -800px;
+            bottom: 14px;
+            left: -1000px;
             display: flex;
-            flex-direction: row; /* Engine first, then tender, then coaches */
+            flex-direction: row;
             align-items: flex-end;
-            animation: runForward 22s linear infinite;
+            animation: runForward 25s linear infinite;
         }
 
         @keyframes runForward {
-            0% { left: -800px; }
+            0% { left: -1000px; }
             100% { left: 100%; }
         }
 
         /* Locomotive Body (BR Green) */
-        .loco {
-            width: 160px;
-            height: 50px;
+        .loco-main {
+            display: flex;
+            align-items: flex-end;
+            position: relative;
+        }
+
+        /* Boiler Section */
+        .boiler-section {
+            width: 180px;
+            height: 55px;
             background: #004225; /* British Racing Green */
-            border-radius: 25px 8px 2px 2px;
+            border-radius: 30px 5px 2px 2px;
             position: relative;
             border: 2px solid #002b18;
-            box-shadow: inset 0 8px 8px rgba(255,255,255,0.15);
+            box-shadow: inset 0 10px 10px rgba(255,255,255,0.15);
             z-index: 10;
         }
 
-        /* Gold/Yellow Writing (LNER / 4472) */
-        .loco::after {
-            content: "LNER 4472";
-            position: absolute;
-            bottom: 10px;
-            left: 40px;
-            font-size: 12px;
-            font-weight: bold;
-            color: #FFD700; /* Gold */
-            font-family: 'Times New Roman', serif;
-            letter-spacing: 1px;
-            text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
-        }
-
-        /* Funnel */
-        .funnel {
-            width: 12px;
-            height: 18px;
+        /* Tapered Front (Smokebox) */
+        .smokebox {
+            width: 40px;
+            height: 50px;
             background: #111;
             position: absolute;
-            top: -15px;
-            left: 35px;
+            left: -35px;
+            bottom: 0;
+            border-radius: 15px 0 0 5px;
+            border: 1px solid #000;
+        }
+
+        /* Smoke Deflectors */
+        .deflector {
+            width: 15px;
+            height: 45px;
+            background: #004225;
+            position: absolute;
+            left: -38px;
+            bottom: 5px;
+            border: 1px solid #002b18;
+            z-index: 15;
+            border-radius: 2px;
+        }
+
+        /* Banjo Dome */
+        .dome {
+            width: 25px;
+            height: 8px;
+            background: #004225;
+            position: absolute;
+            top: -6px;
+            left: 70px;
+            border-radius: 10px 10px 0 0;
+            border: 1px solid #002b18;
+        }
+
+        /* Funnel (Double Chimney) */
+        .funnel {
+            width: 14px;
+            height: 12px;
+            background: #111;
+            position: absolute;
+            top: -10px;
+            left: 15px;
             border-radius: 2px;
         }
 
         /* Smoke Animation */
         .smoke-cloud {
             position: absolute;
-            top: -30px;
-            left: 35px;
+            top: -25px;
+            left: 15px;
             width: 15px;
             height: 15px;
             background: rgba(220,220,220,0.7);
             border-radius: 50%;
-            animation: puffCloud 2.5s infinite;
+            animation: puffCloud 2s infinite;
         }
 
         @keyframes puffCloud {
             0% { transform: translateY(0) scale(1); opacity: 0.7; }
-            100% { transform: translateY(-50px) scale(5); opacity: 0; }
+            100% { transform: translateY(-60px) scale(6); opacity: 0; }
         }
 
-        /* Wheels */
+        /* Cab Section */
+        .cab {
+            width: 50px;
+            height: 60px;
+            background: #004225;
+            position: absolute;
+            right: -45px;
+            bottom: 0;
+            border: 2px solid #002b18;
+            border-radius: 2px 10px 0 0;
+            z-index: 11;
+        }
+        .cab-window {
+            width: 15px;
+            height: 15px;
+            background: #ADD8E6;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            border: 1px solid #002b18;
+        }
+
+        /* Gold/Yellow Writing (LNER / 4472) */
+        .loco-main::after {
+            content: "LNER 4472";
+            position: absolute;
+            bottom: 12px;
+            left: 50px;
+            font-size: 12px;
+            font-weight: bold;
+            color: #FFD700; /* Gold */
+            font-family: 'Times New Roman', serif;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+            z-index: 20;
+        }
+
+        /* Wheels - 4-6-2 Arrangement */
         .wheel {
-            width: 22px;
-            height: 22px;
             background: #111;
             border: 4px solid #444;
             border-radius: 50%;
             position: absolute;
-            bottom: -12px;
             animation: rotateWheel 0.5s linear infinite;
+            z-index: 5;
         }
-        .w1 { left: 30px; }
-        .w2 { left: 65px; }
-        .w3 { left: 100px; }
-        .w4 { left: 135px; }
-
         @keyframes rotateWheel {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
 
+        /* Leading Wheels (4) */
+        .lead-wheel { width: 18px; height: 18px; bottom: -10px; }
+        .lw1 { left: -25px; }
+        .lw2 { left: -5px; }
+
+        /* Driving Wheels (6) */
+        .drive-wheel { width: 35px; height: 35px; bottom: -18px; border-width: 6px; }
+        .dw1 { left: 25px; }
+        .dw2 { left: 65px; }
+        .dw3 { left: 105px; }
+
+        /* Trailing Wheel (2) */
+        .trail-wheel { width: 20px; height: 20px; bottom: -11px; left: 155px; }
+
         /* Tender (Coal Car) */
         .tender {
-            width: 90px;
-            height: 40px;
+            width: 110px;
+            height: 45px;
             background: #004225;
-            margin-left: 3px;
+            margin-left: 50px; /* Space for cab */
             border-radius: 2px;
             position: relative;
             border: 2px solid #002b18;
+            z-index: 10;
         }
         .tender::before {
             content: "";
             position: absolute;
-            top: -8px;
+            top: -10px;
             left: 5px;
-            width: 80px;
-            height: 12px;
+            width: 100px;
+            height: 15px;
             background: #111; /* Coal */
-            border-radius: 6px 6px 0 0;
+            border-radius: 8px 8px 0 0;
         }
+        .tender::after {
+            content: "LNER";
+            position: absolute;
+            top: 12px;
+            left: 30px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #FFD700;
+            font-family: 'Times New Roman', serif;
+        }
+        .tender-wheel { width: 18px; height: 18px; bottom: -10px; }
+        .tw1 { left: 10px; }
+        .tw2 { left: 35px; }
+        .tw3 { left: 60px; }
+        .tw4 { left: 85px; }
 
         /* Coaches */
         .coach {
-            width: 130px;
-            height: 42px;
+            width: 150px;
+            height: 48px;
             background: #8B4513; /* Teak/Brown LNER Coaches */
             margin-left: 5px;
             border-radius: 2px;
@@ -146,21 +236,18 @@
             border: 2px solid #5D2E0C;
             display: flex;
             justify-content: space-around;
-            padding-top: 10px;
+            padding-top: 12px;
+            z-index: 10;
         }
         .window {
-            width: 18px;
-            height: 15px;
+            width: 22px;
+            height: 18px;
             background: #ADD8E6;
             border: 1px solid #5D2E0C;
         }
-
-        /* Wheels for Tender and Coaches */
-        .tender .wheel, .coach .wheel {
-            width: 16px;
-            height: 16px;
-            bottom: -10px;
-        }
+        .coach-wheel { width: 18px; height: 18px; bottom: -10px; }
+        .cw1 { left: 20px; }
+        .cw2 { left: 110px; }
 
         /* ===== TOP NAVIGATION ===== */
         .topnav {
@@ -274,29 +361,43 @@
 <div class="train-track">
     <div class="train-container">
         <!-- Locomotive (Engine) -->
-        <div class="loco">
-            <div class="funnel"></div>
-            <div class="smoke-cloud"></div>
-            <div class="wheel w1"></div>
-            <div class="wheel w2"></div>
-            <div class="wheel w3"></div>
-            <div class="wheel w4"></div>
+        <div class="loco-main">
+            <div class="smokebox">
+                <div class="funnel"></div>
+                <div class="smoke-cloud"></div>
+            </div>
+            <div class="deflector"></div>
+            <div class="boiler-section">
+                <div class="dome"></div>
+            </div>
+            <div class="cab">
+                <div class="cab-window"></div>
+            </div>
+            <!-- Wheels 4-6-2 -->
+            <div class="wheel lead-wheel lw1"></div>
+            <div class="wheel lead-wheel lw2"></div>
+            <div class="wheel drive-wheel dw1"></div>
+            <div class="wheel drive-wheel dw2"></div>
+            <div class="wheel drive-wheel dw3"></div>
+            <div class="wheel trail-wheel"></div>
         </div>
         <!-- Tender -->
         <div class="tender">
-            <div class="wheel w1" style="left:15px"></div>
-            <div class="wheel w2" style="left:55px"></div>
+            <div class="wheel tender-wheel tw1"></div>
+            <div class="wheel tender-wheel tw2"></div>
+            <div class="wheel tender-wheel tw3"></div>
+            <div class="wheel tender-wheel tw4"></div>
         </div>
         <!-- Coaches -->
         <div class="coach">
             <div class="window"></div><div class="window"></div><div class="window"></div><div class="window"></div>
-            <div class="wheel w1" style="left:25px"></div>
-            <div class="wheel w2" style="left:90px"></div>
+            <div class="wheel coach-wheel cw1"></div>
+            <div class="wheel coach-wheel cw2"></div>
         </div>
         <div class="coach">
             <div class="window"></div><div class="window"></div><div class="window"></div><div class="window"></div>
-            <div class="wheel w1" style="left:25px"></div>
-            <div class="wheel w2" style="left:90px"></div>
+            <div class="wheel coach-wheel cw1"></div>
+            <div class="wheel coach-wheel cw2"></div>
         </div>
     </div>
 </div>
@@ -313,7 +414,7 @@
 <div id="home" class="page active">
     <div class="hero">
         <h1>Model Train Man</h1>
-        <p>Your Ultimate Resource for Hornby Trains & Layouts</p>
+        <p>Your Ultimate Resource for Model Trains & Layouts</p>
     </div>
     
     <div style="max-width:800px; margin:40px auto; text-align:center;">
