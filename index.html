@@ -802,7 +802,24 @@ function updateAdTotal() {
 
 // ===== AD BOARD RENDERING =====
 function getAds() { return JSON.parse(localStorage.getItem('mtrAds') || '[]'); }
+function saveAds(ads) { localStorage.setItem('mtrAds', JSON.stringify(ads)); }
+
+// Seed some example ads if the board is empty
+function seedExampleAds() {
+    let ads = getAds();
+    if (ads.length === 0) {
+        ads = [
+            { slot: 1, status: 'active', text: 'Hornby Flying Scotsman 2005', link: 'https://ebay.co.uk', image: '' },
+            { slot: 3, status: 'active', text: 'DCC Controllers – 20% off', link: 'https://example.com', image: '' },
+            { slot: 5, status: 'active', text: 'Wanted: Class 37 body', link: '', image: '' },
+            { slot: 8, status: 'active', text: 'Model train show – Sat 10th', link: 'https://example.org', image: '' }
+        ];
+        saveAds(ads);
+    }
+}
+
 function renderAdBoard() {
+    seedExampleAds(); // ensure some ads show
     var ads = getAds();
     var board = document.getElementById('adBoard');
     if (!board) return;
@@ -4070,7 +4087,7 @@ var hornbyDB2 = [
     }
 ];
 function identifyByNumber2(type) {
-    var rNum = document.getElementById('trainNumber2').value.trim().toUpperCase();
+    var rNum = document.getElementById('searchInput2').value.trim().toUpperCase();
     var model = hornbyDB2.find(item => item.id === rNum && item.type === type);
     if (model) { currentModel2 = model; displayResults2(model); }
     else { document.getElementById('errorMessage2').textContent = 'No ' + type + ' found with: ' + rNum; }
@@ -4677,7 +4694,7 @@ var hornbyDB3 = [
     }
 ];
 function identifyByNumber3(type) {
-    var rNum = document.getElementById('trainNumber3').value.trim().toUpperCase();
+    var rNum = document.getElementById('searchInput3').value.trim().toUpperCase();
     var model = hornbyDB3.find(item => item.id === rNum && item.type === type);
     if (model) { currentModel3 = model; displayResults3(model); }
     else { document.getElementById('errorMessage3').textContent = 'No ' + type + ' found with: ' + rNum; }
@@ -4705,12 +4722,135 @@ function showHistory3() {
 }
 function launchEbay3() { if (currentModel3) window.open('https://www.ebay.co.uk/sch/i.html?_nkw=' + encodeURIComponent(currentModel3.name), '_blank'); }
 
+// ===== MISSING FUNCTIONS FOR FINDER 2 =====
+function searchModels2() {
+    var query = document.getElementById('searchInput2').value.trim().toLowerCase();
+    if (!query) return;
+    var model = hornbyDB2.find(item => 
+        item.id.toLowerCase().includes(query) || 
+        item.name.toLowerCase().includes(query) || 
+        item.category.toLowerCase().includes(query)
+    );
+    if (model) {
+        currentModel2 = model;
+        displayResults2(model);
+    } else {
+        document.getElementById('errorMessage2').textContent = 'No matching model found.';
+    }
+}
+function resetApp2() {
+    document.getElementById('results2').style.display = 'none';
+    document.getElementById('errorMessage2').textContent = '';
+    document.getElementById('searchInput2').value = '';
+    document.getElementById('manualRNumber2').value = '';
+    document.getElementById('manualRNumber2').style.display = 'none';
+    document.getElementById('manualIdentifyBtn2').style.display = 'none';
+    document.getElementById('imagePreview2').style.display = 'none';
+}
+function identifyManually2() {
+    var rNum = document.getElementById('manualRNumber2').value.trim().toUpperCase();
+    var model = hornbyDB2.find(item => item.id === rNum);
+    if (model) {
+        currentModel2 = model;
+        displayResults2(model);
+    } else {
+        document.getElementById('errorMessage2').textContent = 'Not found: ' + rNum;
+    }
+}
+function launchEtsy2() { if (currentModel2) window.open('https://www.etsy.com/search?q=' + encodeURIComponent(currentModel2.name), '_blank'); }
+function launchFB2() { if (currentModel2) window.open('https://www.facebook.com/marketplace/', '_blank'); }
+function shareWA2() {
+    if (currentModel2) {
+        var msg = 'Hornby ' + currentModel2.name + ' Value: ' + currentModel2.estimatedValue;
+        window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
+    }
+}
+// Event listener for image upload in finder2
+document.getElementById('trainImage2')?.addEventListener('change', function(e) {
+    var file = e.target.files[0];
+    if (file) {
+        var reader = new FileReader();
+        reader.onload = function(ev) {
+            document.getElementById('imagePreview2').src = ev.target.result;
+            document.getElementById('imagePreview2').style.display = 'block';
+            document.getElementById('manualRNumber2').style.display = 'inline-block';
+            document.getElementById('manualIdentifyBtn2').style.display = 'inline-block';
+        };
+        reader.readAsDataURL(file);
+    }
+});
+
+// ===== MISSING FUNCTIONS FOR FINDER 3 =====
+function searchModels3() {
+    var query = document.getElementById('searchInput3').value.trim().toLowerCase();
+    if (!query) return;
+    var model = hornbyDB3.find(item => 
+        item.id.toLowerCase().includes(query) || 
+        item.name.toLowerCase().includes(query) || 
+        item.category.toLowerCase().includes(query)
+    );
+    if (model) {
+        currentModel3 = model;
+        displayResults3(model);
+    } else {
+        document.getElementById('errorMessage3').textContent = 'No matching model found.';
+    }
+}
+function resetApp3() {
+    document.getElementById('results3').style.display = 'none';
+    document.getElementById('errorMessage3').textContent = '';
+    document.getElementById('searchInput3').value = '';
+    document.getElementById('manualRNumber3').value = '';
+    document.getElementById('manualRNumber3').style.display = 'none';
+    document.getElementById('manualIdentifyBtn3').style.display = 'none';
+    document.getElementById('imagePreview3').style.display = 'none';
+}
+function identifyManually3() {
+    var rNum = document.getElementById('manualRNumber3').value.trim().toUpperCase();
+    var model = hornbyDB3.find(item => item.id === rNum);
+    if (model) {
+        currentModel3 = model;
+        displayResults3(model);
+    } else {
+        document.getElementById('errorMessage3').textContent = 'Not found: ' + rNum;
+    }
+}
+function launchEtsy3() { if (currentModel3) window.open('https://www.etsy.com/search?q=' + encodeURIComponent(currentModel3.name), '_blank'); }
+function launchFB3() { if (currentModel3) window.open('https://www.facebook.com/marketplace/', '_blank'); }
+function shareWA3() {
+    if (currentModel3) {
+        var msg = 'Hornby ' + currentModel3.name + ' Value: ' + currentModel3.estimatedValue;
+        window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
+    }
+}
+// Event listener for image upload in finder3
+document.getElementById('trainImage3')?.addEventListener('change', function(e) {
+    var file = e.target.files[0];
+    if (file) {
+        var reader = new FileReader();
+        reader.onload = function(ev) {
+            document.getElementById('imagePreview3').src = ev.target.result;
+            document.getElementById('imagePreview3').style.display = 'block';
+            document.getElementById('manualRNumber3').style.display = 'inline-block';
+            document.getElementById('manualIdentifyBtn3').style.display = 'inline-block';
+        };
+        reader.readAsDataURL(file);
+    }
+});
+
 // ===== QUIZ LOGIC =====
 var quizPool = [
     { question: "In what year was Hornby founded?", options: ["a) 1901", "b) 1920", "c) 1950"], correct: "b" },
     { question: "What scale is the most popular Hornby model railway?", options: ["a) HO", "b) OO", "c) N"], correct: "b" },
     { question: "Which loco broke the world speed record?", options: ["a) Flying Scotsman", "b) Mallard", "c) Rocket"], correct: "b" }
 ];
+// Add more questions to make 7
+quizPool.push(
+    { question: "Which company acquired Hornby in the 1980s?", options: ["a) Dapol", "b) Bachmann", "c) Margate"], correct: "c" },
+    { question: "What is the most common Hornby track code?", options: ["a) 100", "b) 75", "c) 83"], correct: "a" },
+    { question: "Hornby's flagship model in the 1960s was?", options: ["a) Rocket", "b) Princess Elizabeth", "c) Mallard"], correct: "b" },
+    { question: "What year did Hornby introduce DCC sound?", options: ["a) 1995", "b) 2002", "c) 2010"], correct: "b" }
+);
 var currentQuizQs = [];
 function generateQuiz() {
     var shuffled = quizPool.slice().sort(() => 0.5 - Math.random()).slice(0, 7);
@@ -4738,9 +4878,7 @@ function calculateQuizScore() {
 function newQuizGame() { generateQuiz(); document.getElementById('quizScore').innerHTML = ''; }
 generateQuiz();
 
-// ============================================================
-// NEW AUTOMATION FIXES (Messaging & PayPal)
-// ============================================================
+// ===== FORM SUBMISSION HANDLER (unchanged) =====
 async function handleFormSubmit(form, resultElement, submitButton, redirectUrl = null) {
     submitButton.disabled = true;
     const originalText = submitButton.innerText;
